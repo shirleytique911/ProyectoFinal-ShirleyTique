@@ -12,7 +12,11 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
-    "nanoid": "^5.0.1"
+    "express-handlebars": "^7.1.2",
+    "hbs": "^4.2.0",
+    "nanoid": "^5.0.1",
+    "socket.io": "^4.7.2",
+    "sweetalert2": "^11.7.31"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

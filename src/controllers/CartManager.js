@@ -8,7 +8,28 @@ const productALL =new ProductManager
 class CartManager {
     constructor(){
     this.path ="./src/models/carts.json"
+    this.nextId = null;
+    this.initNextId()
+}
+async initNextId() {
+    this.nextId = await this.calculateNextId();
+}
+
+calculateNextId = async () => {
+    try {
+        let carts = await this.readCarts();
+        if (carts.length === 0) {
+            return 1;
+        } else {
+            const maxId = Math.max(...carts.map((cart) => parseInt(cart.id)));
+            return maxId + 1;
+        }
+    } catch (error) {
+        console.error("Error al calcular ", error);
+        return null;
     }
+}
+
 
     readCarts =async ()=>{
         let carts =await fs.readFile(this.path, "utf-8");
