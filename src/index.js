@@ -15,7 +15,7 @@ const PORT=8080
 
 const httpServer = app.listen(PORT,()=> console.log("Listen puerto 8080"))
 
-const product =new ProductManager();
+const product =new ProductManager;
 
 const SocketServer = new Server(httpServer)
 
@@ -32,6 +32,10 @@ app.use("/", viewsRouter)
 //Static
 app.use("/", express.static(__dirname + "public"));
 
+app.get("/realtimeproducts", (req, res)=> {
+    res.render("realTimeProducts")
+})
+
 //socket
 SocketServer.on("connection", (socket) => {
     console.log(`Usuario ${socket.id}`);
@@ -46,6 +50,7 @@ SocketServer.on("connection", (socket) => {
         }
     });
 });
+
 
 app.get("/", async (req, res) => {
     let allProducts = await product.getProducts()
